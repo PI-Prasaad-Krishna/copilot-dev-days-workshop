@@ -2,6 +2,7 @@
 
 const QUESTION_TIME = 15;
 const TIMEOUT_ADVANCE_DELAY = 800;
+const BEST_SCORE_KEY = "dev-days-best-score";
 let state = createQuiz([]);
 let timeLeft = QUESTION_TIME;
 let timerId = null;
@@ -19,6 +20,39 @@ const feedbackText = document.getElementById("feedback");
 const nextButton = document.getElementById("next-btn");
 const scoreText = document.getElementById("score-text");
 const gradeText = document.getElementById("grade-text");
+const startBestScoreText = document.getElementById("best-score-start");
+const resultBestScoreText = document.getElementById("best-score-result");
+const newBestMessage = document.getElementById("new-best-message");
+
+function getStoredBestScore() {
+  try {
+    const storedScore = localStorage.getItem(BEST_SCORE_KEY);
+    if (storedScore === null) return null;
+
+    const score = Number(storedScore);
+    return Number.isInteger(score) && score >= 0 && score <= 100 ? score : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveBestScore(score) {
+  try {
+    localStorage.setItem(BEST_SCORE_KEY, String(score));
+  } catch {
+    // A blocked or unavailable localStorage should not stop the quiz.
+  }
+}
+
+function formatBestScore(bestScore) {
+  return bestScore === null ? "Best score: Not yet recorded" : `Best score: ${bestScore}%`;
+}
+
+function renderBestScore(bestScore) {
+  const text = formatBestScore(bestScore);
+  startBestScoreText.textContent = text;
+  resultBestScoreText.textContent = text;
+}
 
 function showScreen(screenToShow) {
   [startScreen, quizScreen, resultScreen].forEach((screen) => {
@@ -144,11 +178,18 @@ function showResults() {
   clearAdvanceTimeout();
   const total = state.questions.length;
   const percentage = calculatePercentage(state.score, total);
+  const previousBest = getStoredBestScore();
+  const newBest = isNewBestScore(percentage, previousBest);
+  if (newBest) saveBestScore(percentage);
+
   scoreText.textContent = `You scored ${state.score} out of ${total} (${percentage}%)`;
   gradeText.textContent = `Grade: ${getGrade(percentage)}`;
+  renderBestScore(newBest ? percentage : previousBest);
+  newBestMessage.hidden = !newBest;
   showScreen(resultScreen);
 }
 
 document.getElementById("start-btn").addEventListener("click", startQuiz);
 document.getElementById("restart-btn").addEventListener("click", startQuiz);
 nextButton.addEventListener("click", nextQuestion);
+renderBestScore(getStoredBestScore());

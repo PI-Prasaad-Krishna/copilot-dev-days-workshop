@@ -55,6 +55,10 @@ function calculatePercentage(score, total) {
   return Math.round((score / total) * 100);
 }
 
+function isNewBestScore(current, best) {
+  return best === null || current > best;
+}
+
 /**
  * Formats a remaining-time value for status messages.
  */
@@ -92,6 +96,7 @@ if (typeof module !== "undefined" && module.exports) {
     answerQuestion,
     isQuizFinished,
     calculatePercentage,
+    isNewBestScore,
     formatTimeLeft,
     getFeedbackMessage,
     getGrade,
