@@ -3,7 +3,7 @@
 ## Build, Run, and Test
 
 - Use Node.js 20 or newer.
-- Run the full test suite from the repository root with `npm test`. It uses Node's built-in test runner and currently includes a deliberately planted `getGrade(90)` failure for the workshop's debugging chapter; do not treat that failure as an infrastructure problem.
+- Run the full test suite from the repository root with `npm test`. It uses Node's built-in test runner. The workshop guides may describe an intentionally planted `getGrade` failure in an earlier starting state, but the maintained code and tests should pass.
 - Run only the logic tests with `node --test tests/quiz.test.js`, or only the question-data tests with `node --test tests/questions.test.js`.
 - Run one named test with Node's built-in filter, for example:
   `node --test --test-name-pattern="getGrade gives an A" tests/quiz.test.js`
