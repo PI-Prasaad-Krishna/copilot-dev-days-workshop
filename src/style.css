@@ -57,6 +57,18 @@ h2 {
   margin: 0;
 }
 
+.timer {
+  margin: 0.75rem 0 0;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  text-align: right;
+}
+
+.timer.warning {
+  color: var(--wrong);
+  font-weight: 700;
+}
+
 #options {
   list-style: none;
   padding: 0;

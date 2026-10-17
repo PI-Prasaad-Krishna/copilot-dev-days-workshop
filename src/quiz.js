@@ -30,6 +30,13 @@ function calculatePercentage(score, total) {
 }
 
 /**
+ * Formats a remaining-time value for status messages.
+ */
+function formatTimeLeft(seconds) {
+  return `⏱ ${Math.max(0, Math.floor(seconds))}s`;
+}
+
+/**
  * Turns a percentage into a grade.
  * A = 90% or more, B = 75% or more, C = 50% or more.
  */
@@ -42,5 +49,5 @@ function getGrade(percentage) {
 
 // Lets Node.js tests load this file. Browsers ignore this block.
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { shuffle, isCorrect, calculatePercentage, getGrade };
+  module.exports = { shuffle, isCorrect, calculatePercentage, formatTimeLeft, getGrade };
 }
