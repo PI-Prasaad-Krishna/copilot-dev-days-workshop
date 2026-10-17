@@ -36,6 +36,36 @@ const QUESTIONS = [
     ],
     answer: 1,
   },
+  {
+    question: "What is a GitHub Actions workflow?",
+    options: [
+      "A hosted Git repository",
+      "An automated process defined in a YAML file",
+      "A Git branch naming convention",
+      "A local code editor extension",
+    ],
+    answer: 1,
+  },
+  {
+    question: "Where are GitHub Actions workflow files stored?",
+    options: [
+      ".github/workflows",
+      ".github/actions",
+      "actions/workflows",
+      "workflows/.github",
+    ],
+    answer: 0,
+  },
+  {
+    question: "Which event can trigger a GitHub Actions workflow?",
+    options: [
+      "A repository push",
+      "A monitor brightness change",
+      "A local file rename outside the repository",
+      "A browser bookmark update",
+    ],
+    answer: 0,
+  },
 ];
 
 // Lets Node.js tests load this file. Browsers ignore this block.

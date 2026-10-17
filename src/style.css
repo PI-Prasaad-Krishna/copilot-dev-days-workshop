@@ -57,6 +57,11 @@ h2 {
   margin: 0;
 }
 
+.new-best {
+  color: var(--correct);
+  font-weight: 700;
+}
+
 .timer {
   margin: 0.75rem 0 0;
   font-variant-numeric: tabular-nums;
